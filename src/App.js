@@ -1,26 +1,69 @@
 import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import { BrowserRouter as Router, Routes, Route, Link, Outlet } from "react-router-dom";
 
-function App() {
+export default function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <Router>
+      <nav>
+        < Link to="/">Home</Link>
+        < Link to="/launch">Launch</Link>
+      </nav>
+      
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="launch" element={<Launch />} />
+          <Route path="/" element={<LaunchIndex />} />
+        </Route>
+      </Routes>
+    </Router>
+  );
+}
+
+function Home() {
+  return (
+    <div>
+      <h1>Welcome Home!</h1>
     </div>
   );
 }
 
-export default App;
+function Launch() {
+  return (
+    <div>
+      <h1>Welcome to Launch!</h1>
+
+      <Outlet />
+    </div>
+  );
+}
+
+function LaunchIndex(){
+  return (
+    <ul>
+      {Object.entries(shoes).map(([slug, {name, img}]) => (
+        <li key={slug}>
+          <h2>{name}</h2>
+          <img src={img} alt={name} />
+        </li>
+      ))}
+    </ul>
+  );
+}
+
+const shoes = {
+  "DAYBREAK": {
+    name: "TOPAZ",
+    img:
+      "https://static.nike.com/a/images/t_prod_ss/w_640,c_limit,f_auto/ca54e328-b1c4-40b1-b20f-295835d52dc3/nike-daybreak-topaz-release-date.jpg"
+  },
+  "ZOOM VOMERO": {
+    name: "SE",
+    img:
+      "https://static.nike.com/a/images/t_prod_ss/w_640,c_limit,f_auto/c3212092-dbe1-4d65-90c0-5aafbf8e2fe5/zoom-vomero-5-se-release-date.jpg"
+  },
+  "SPACE HIPPIE 01 - VOLT": {
+    name: "THIS IS TRASH",
+    img:
+      "https://static.nike.com/a/images/t_prod_ss/w_640,c_limit,f_auto/832a7814-b0a2-4e8b-9331-cea7257e85eb/space-hippie-01-volt-this-is-trash-release-date.jpg"
+  }
+};
