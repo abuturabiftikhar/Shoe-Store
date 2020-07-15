@@ -3,7 +3,8 @@ import { BrowserRouter as Router,
   Routes,
   Route,
   Link,
-  Outlet
+  Outlet,
+  useParams
 } from "react-router-dom";
 
 export default function App() {
@@ -18,9 +19,20 @@ export default function App() {
         <Route path="/" element={<Home />} />
         <Route path="launch" element={<Launch />}>
           <Route path="/" element={<LaunchIndex />} />
+          <Route path=":slug" element={<LaunchShoe />} />
         </Route>
+        <Route path="*" element={<NotFound />} />
       </Routes>
     </Router>
+  );
+}
+
+function NotFound() {
+  return (
+    <div>
+      <h1>Not found!</h1>
+      <p>Sorry your page was not found!</p>
+    </div>
   );
 }
 
@@ -47,11 +59,31 @@ function LaunchIndex(){
     <ul>
       {Object.entries(shoes).map(([slug, {name, img}]) => (
         <li key={slug}>
-          <h2>{name}</h2>
-          <img src={img} alt={name} />
+          <Link to={`/launch/${slug}`}>
+            <h2>{name}</h2>
+            <img src={img} alt={name} />
+          </Link>
         </li>
       ))}
     </ul>
+  );
+}
+
+function LaunchShoe() {
+  const { slug } = useParams();
+  const shoe = shoes[slug];
+
+  if (!shoe) {
+    return <h2>Not Found!</h2>
+  }
+
+  const {name, img} = shoe;
+
+  return (
+    <div>
+      <h2>{name}</h2>
+      <img src={img} alt={name} />
+    </div>
   );
 }
 
