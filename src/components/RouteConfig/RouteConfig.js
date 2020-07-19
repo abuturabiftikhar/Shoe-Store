@@ -6,11 +6,11 @@ import { Cart } from "./components/Pages/Cart/Cart";
 import { ProductIndex } from "./components/ProductIndex/ProductIndex";
 import { ProductDetails } from "./components/ProductDetails/ProductDetails";
 import { NotFound } from "./components/NotFound/NotFound";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 
-function App() {
+function RouteConfig() {
   return (
-    <BrowserRouter>
+    <Router>
       <Header />
         <Routes>
         <Route path="/" element={<Home />} />
@@ -21,8 +21,8 @@ function App() {
           </Route>
           <Route path="*" element={<NotFound />} />
         </Routes>
-    </BrowserRouter>
+    </Router>
   );
 }
 
-export default App;
+export default RouteConfig;

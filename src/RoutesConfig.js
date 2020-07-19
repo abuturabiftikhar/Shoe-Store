@@ -8,7 +8,7 @@ import { ProductDetails } from "./components/ProductDetails/ProductDetails";
 import { NotFound } from "./components/NotFound/NotFound";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 
-function App() {
+function RoutesConfig() {
   return (
     <BrowserRouter>
       <Header />
@@ -25,4 +25,4 @@ function App() {
   );
 }
 
-export default App;
+export default RoutesConfig;
